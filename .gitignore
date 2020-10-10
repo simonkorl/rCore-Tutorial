@@ -23,5 +23,6 @@ Cargo.lock
 os/target
 user/target
 user/build
+os/**/target
 # GDB 临时文件
 .gdb_history

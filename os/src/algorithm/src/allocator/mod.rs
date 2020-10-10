@@ -4,6 +4,8 @@ mod stacked_allocator;
 mod bitmap_vector_allocator;
 
 /// 分配器：固定容量，每次分配 / 回收一个元素
+/// 回收的元素使用数字计数，大小并不固定
+/// 可以按字节分配，也可以按页帧号分配
 pub trait Allocator {
     /// 给定容量，创建分配器
     fn new(capacity: usize) -> Self;
@@ -22,6 +24,7 @@ pub trait VectorAllocator {
     /// 分配指定长度的空间，无法分配则返回 `None`
     fn alloc(&mut self, size: usize, align: usize) -> Option<usize>;
     /// 回收指定空间（一定是之前分配的）
+    /// 注：函数内部不一定检查了回收的空间是否为之前分配的空间
     fn dealloc(&mut self, start: usize, size: usize, align: usize);
 }
 
