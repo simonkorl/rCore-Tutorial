@@ -32,7 +32,7 @@ ifeq ($(MODE),release)
 else
 	@cargo build
 endif
-	$(foreach bin_file,$(BIN_FILES),riscv64-unknown-elf-objcopy --strip-debug $(bin_file) $(bin_file);)
+	$(foreach bin_file,$(BIN_FILES),rust-objcopy --strip-debug $(bin_file) $(bin_file);)
 	@echo Targets: $(patsubst $(SRC_DIR)/%.rs, %, $(SRC_FILES))
 	@rm -rf $(OUT_DIR)
 	@mkdir -p $(OUT_DIR)
